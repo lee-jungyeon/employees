@@ -7,6 +7,38 @@ import java.sql.*;
 import vo.Departments;
 
 public class DepartmentsDao {	
+	public int selectDepartmentsRowCount() {
+		int count = 0;
+		final String sql="SELECT COUNT(*) FROM departments";
+		Connection conn =null;
+		PreparedStatement stmt=null;
+		ResultSet rs = null;
+		try {
+			//드라이브 이름
+			Class.forName("org.mariadb.jdbc.Driver");
+			conn=DriverManager.getConnection("jdbc:mariadb://localhost:3306/employees","root","java1234");
+			stmt=conn.prepareStatement(sql);
+			rs=stmt.executeQuery();
+			if(rs.next()) {
+				count=rs.getInt("COUNT(*)");
+			}
+			
+		}catch(Exception e) { // 자바의 변수 생명주기는 {} 
+			e.printStackTrace();
+		}finally {
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+	
+		
+		return  count;
+	}
 	public List<Departments> selectDepartmentsList(){
 		List<Departments>list = new ArrayList<Departments>();
 		Connection conn=null;
