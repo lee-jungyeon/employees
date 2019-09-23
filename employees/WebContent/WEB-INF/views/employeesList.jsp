@@ -35,6 +35,10 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div>
+	<a href="${pageContext.request.contextPath}">home으로 </a>
+
+</div>
 	<h1>사원 목록</h1>
 	<form method="get" action="${pageContext.request.contextPath}/employees/getEmployeesList">
 		<select name = "limit">

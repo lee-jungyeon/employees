@@ -8,6 +8,10 @@
 <title>departments List</title>
 </head>
 <body>
+<div>
+	<a href="${pageContext.request.contextPath}">home으로 </a>
+
+</div>
 	<h1>부서 목록</h1>
 	
 	<table border="1">
