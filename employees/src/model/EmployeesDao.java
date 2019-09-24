@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import db.DBHelper;
 import vo.Employees;
 
 public class EmployeesDao {
@@ -26,8 +27,7 @@ public class EmployeesDao {
 		}
 		
 		try {
-			Class.forName("org.mariadb.jdbc.Driver");
-			conn=DriverManager.getConnection("jdbc:mariadb://localhost:3306/employees","root","java1234");
+			conn= DBHelper.getConnection();
 			stmt=conn.prepareStatement(sql);
 			rs=stmt.executeQuery();
 			
@@ -45,15 +45,9 @@ public class EmployeesDao {
 		}catch(Exception e) {
 			
 		}finally {
-			try {
-				rs.close();
-				stmt.close();
-				conn.close();
-				
-			}catch(Exception e) {
-				e.printStackTrace();
+			
+			   DBHelper.close(rs, stmt, conn);
 			}
-		}
 		
 		
 		return list;
@@ -68,8 +62,7 @@ public class EmployeesDao {
 		ResultSet rs = null;
 		try {
 			//드라이브 이름
-			Class.forName("org.mariadb.jdbc.Driver");
-			conn=DriverManager.getConnection("jdbc:mariadb://localhost:3306/employees","root","java1234");
+			conn= DBHelper.getConnection();
 			stmt=conn.prepareStatement(sql);
 			rs=stmt.executeQuery();
 			if(rs.next()) {
@@ -78,16 +71,10 @@ public class EmployeesDao {
 			
 		}catch(Exception e) { // 자바의 변수 생명주기는 {} 
 			e.printStackTrace();
-		}finally {
-			try {
-				rs.close();
-				stmt.close();
-				conn.close();
-				
-			}catch(Exception e) {
-				e.printStackTrace();
+		}finally{
+			
+			   DBHelper.close(rs, stmt, conn);
 			}
-		}
 	
 		
 		return  count;
@@ -103,8 +90,7 @@ public List<Employees> selectEmployeesListByLimit(int limit){
 	
 	
 	try {
-		Class.forName("org.mariadb.jdbc.Driver");
-		conn=DriverManager.getConnection("jdbc:mariadb://localhost:3306/employees","root","java1234");
+		conn= DBHelper.getConnection();
 		stmt=conn.prepareStatement(sql);
 		stmt.setInt(1,limit);
 		rs=stmt.executeQuery();
@@ -123,16 +109,9 @@ public List<Employees> selectEmployeesListByLimit(int limit){
 	}catch(Exception e) {
 		
 	}finally {
-		try {
-			rs.close();
-			stmt.close();
-			conn.close();
-			
-		}catch(Exception e) {
-			e.printStackTrace();
+		
+		   DBHelper.close(rs, stmt, conn);
 		}
-	}
-	
 	
 	return list;
 }

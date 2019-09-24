@@ -23,11 +23,13 @@ public class GetEmployeesListServlet extends HttpServlet {
 		}
 		System.out.println("limit 확인: "+limit);
 		
-		
+		//객체 생성을 한다
 		employeesDao = new EmployeesDao();
+		// employees list 리턴 값 limit 저장
 		List<Employees>list= employeesDao.selectEmployeesListByLimit(limit);
-		
+		// view로 넘길  request에 list를 저장한다.
 		request.setAttribute("list", list);
+		// view로 forward할 주소를 입력후 forward한다.
 		request.getRequestDispatcher("/WEB-INF/views/employeesList.jsp").forward(request,  response);
 	}
 }
