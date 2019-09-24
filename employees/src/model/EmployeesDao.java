@@ -5,12 +5,44 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import db.DBHelper;
 import vo.Employees;
 
 public class EmployeesDao {
+	public List<Map<String, Object>> selectEmployeesCountByGender(){
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		String sql="SELECT gender, COUNT(gender) cnt FROM employees GROUP BY gender";
+		
+		try {
+			conn= DBHelper.getConnection();
+			stmt=conn.prepareStatement(sql);
+			rs=stmt.executeQuery();
+			
+			while(rs.next()) {
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("gender",rs.getString("gender"));
+				map.put("cnt",rs.getInt("cnt"));
+				list.add(map);
+			}
+			
+		}catch(Exception e) {
+			
+		}finally {
+			
+			   DBHelper.close(rs, stmt, conn);
+			}
+		
+		return list;
+	}
+	
+	
 	public List<Employees> selectEmployeesListOrderBy(String order){
 		System.out.println("order value :"+order);
 		List<Employees> list = new ArrayList<Employees>();
