@@ -52,10 +52,10 @@
 			<li><a href="${pageContext.request.contextPath}/departments/getDepartmentsList">부서 목록</a></li>
 			<li><a href="${pageContext.request.contextPath}/employees/getEmployeesList">사원 목록</a></li>
 		
-		
+			
 			<li><a href="${pageContext.request.contextPath}/employees/getEmployeesListOrderBy?order=asc">first_name 오름차순</a></li>
 			<li><a href="${pageContext.request.contextPath}/employees/getEmployeesListOrderBy?order=desc">first_name 내림차순</a></li>
-			
+			<li><a href="${pageContext.request.contextPath}/titles/getTitlesListDistinct">업무목록(중복제거)</a></li>
 		</ul>
 		
 	</div>
