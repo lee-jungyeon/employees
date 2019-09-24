@@ -1,8 +1,7 @@
 package controller;
 
 import java.io.IOException;
-import java.util.List;
-
+import java.util.*;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,19 +9,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.DepartmentsDao;
-import vo.Departments;
 
-
-@WebServlet("/departments/getDepartmentsList")
-public class GetDepartmentsListServlet extends HttpServlet {
+@WebServlet("/departments/getDepartmentsCountByDeptNo")
+public class GetDepartmentsCountByDeptNoServlet extends HttpServlet {
 	private DepartmentsDao departmentsDao;
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		departmentsDao =new DepartmentsDao();
-		List<Departments>list= departmentsDao.selectDepartmentsList();
-		request.setAttribute("list", list);
-		request.getRequestDispatcher("/WEB-INF/views/departmentsList.jsp").forward(request,response);
-		
+	departmentsDao = new DepartmentsDao();
+	
+	List<Map<String , Object>>list=departmentsDao.selectDepartmentsCountByDeptNo();
+	
+	request.setAttribute("list", list);
+	request.getRequestDispatcher("/WEB-INF/views/departments/departmentsCountByDeptNo.jsp").forward(request, response);
 	}
 
 }

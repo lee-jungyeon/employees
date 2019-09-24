@@ -58,6 +58,7 @@
 			<li><a href="${pageContext.request.contextPath}/titles/getTitlesListDistinct">업무목록(중복제거)</a></li>
 			<li><a href="${pageContext.request.contextPath}/salaries/getSalariesStatistics">연봉의 통계값</a></li>
 			<li><a href="${pageContext.request.contextPath}/employees/getEmployeesCountByGender">사원 수(group by gender)</a></li>
+			<li><a href="${pageContext.request.contextPath}/departments/getDepartmentsCountByDeptNo">현재 부서별 사원수</a></li>
 		</ul>
 		
 	</div>
