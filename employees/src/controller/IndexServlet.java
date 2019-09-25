@@ -42,12 +42,17 @@ public class IndexServlet extends HttpServlet {
 	
 	this.employeesDao = new EmployeesDao();
 	int employeesRowCount= employeesDao.selectEmployeesRowCount();
+	int maxEmpNo=employeesDao.selectEmpNo("max");
+	int minEmpNo=employeesDao.selectEmpNo("min");
 	
 	/*
 	// /WEB-INF/views/index/jsp
 	RequestDispatcher rd= request.getRequestDispatcher("/WEB-INF/views/index/jsp");
-	rd.forward(request,response);//forward()가로안에있는 값 위임
+	rd.forward(request,response);//forward()媛�濡쒖븞�뿉�엳�뒗 媛� �쐞�엫
 	*/
+	request.setAttribute("max",maxEmpNo);
+	request.setAttribute("min",minEmpNo);
+	
 	request.setAttribute("departmentsRowCount",departmentsRowCount);
 	request.setAttribute("deptManagerRowCount",deptManagerRowCount);
 	request.setAttribute("deptEmpRowCount",deptEmpRowCount);
