@@ -59,9 +59,17 @@
 			<li><a href="${pageContext.request.contextPath}/salaries/getSalariesStatistics">연봉의 통계값</a></li>
 			<li><a href="${pageContext.request.contextPath}/employees/getEmployeesCountByGender">사원 수(group by gender)</a></li>
 			<li><a href="${pageContext.request.contextPath}/departments/getDepartmentsCountByDeptNo">현재 부서별 사원수</a></li>
+			<li><a href="${pageContext.request.contextPath}/employees/getEmployeesListByPage">사원 목록(10명씩 페이징)</a></li>
 		</ul>
 		
 	</div>
+	<div>
+		<form method="get" action="${pageContext.request.contextPath}/emloyees/getEmployeesBetween">
+			<input type="number" name="begin">~<input type="number" name="end">
+			<button type="submit">사원 목록 between......and....</button>
+			(${minEmpNo}~{maxEmpNo})(10001~499999)
+		</form>
 	
+	</div>
 </body>
 </html>
