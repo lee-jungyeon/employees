@@ -18,7 +18,7 @@ public class GetEmployeesCountByGenderServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	employeesDao = new EmployeesDao();
 	
-	List<Map<String, Object>>list=employeesDao.selectEmployeesCountByGender();
+	List<Map<String, Object>>list=employeesDao.selectEmployeesCountGroupByGender();
 	request.setAttribute("list", list);
 	request.getRequestDispatcher("/WEB-INF/views/employees/employeesCountByGender.jsp").forward(request, response);
 	}
