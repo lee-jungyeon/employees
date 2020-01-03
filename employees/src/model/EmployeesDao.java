@@ -13,6 +13,33 @@ import db.DBHelper;
 import vo.Employees;
 
 public class EmployeesDao {
+	   public int login(Employees employees) {
+		   Connection conn = null;
+		   PreparedStatement stmt = null;
+		   ResultSet rs = null;
+		   int sessionEmpNo =0;
+
+		   System.out.println(employees.getEmpNo());
+
+		   String sql = "select emp_no from employees where emp_no = ? and first_name = ? and last_name = ?";
+		   try {
+			   conn = DBHelper.getConnection();
+			   stmt = conn.prepareStatement(sql);
+			   stmt.setInt(1, employees.getEmpNo());
+			   stmt.setString(2, employees.getFirstName());
+			   stmt.setString(3, employees.getLastName());
+			   rs = stmt.executeQuery();
+			   if(rs.next()) {
+				   sessionEmpNo = rs.getInt("emp_no");
+			   }
+		   } catch(Exception e) {
+			   e.printStackTrace();
+		   } finally {
+			   DBHelper.close(rs, stmt, conn);
+		   }
+		   return sessionEmpNo;
+	   }
+	
 	public int selectLastPage(int rowPerPage) {
 		
 		//selectEmployeesRowCount 메소드를 불러온다.
